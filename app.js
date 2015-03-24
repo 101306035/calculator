@@ -1,9 +1,9 @@
 
 $(function(){
 
-	int before;
-	int after;
-	int results;
+	float before;
+	float after;
+	float results;
 	var operation;
 	var currentText = '';
 	$('#btn1').on('click',function() {
@@ -69,7 +69,7 @@ $(function(){
 	});
 	
 	$('#btnEqual').on('click',function() {	
-		after = currentText*1;
+		after = parseFloat(currentText);
 		calculate(operation);		
 		render();
 	});
@@ -77,10 +77,10 @@ $(function(){
 	$('#btnAdd').on('click',function() {
 		if(operation = null){
 			operation = '+'
-			before = currentText*1;
+			before = parseFloat(currentText);
 			currentText = '';
 		}else if (operation != null) {
-			after = currentText*1;
+			after = parseFloat(currentText);
 			calculate(operation);
 		};
 		render();
@@ -89,10 +89,10 @@ $(function(){
 	$('#btnLess').on('click',function() {
 		if (operation = null) {
 			operation = '-';
-			before = currentText*1;
+			before = parseFloat(currentText);
 			currentText = '';
 		}else if (operation != null) {
-			after = currentText*1;
+			after = parseFloat(currentText);
 			calculate(operation);
 		};
 
@@ -102,10 +102,10 @@ $(function(){
 	$('#btnMultiply').on('click',function() {
 		if (operation = null) {
 			operation = '-';
-			before = currentText*1;
+			before = parseFloat(currentText);
 			currentText = '';
 		}else if (operation != null) {
-			after = currentText*1;
+			after = parseFloat(currentText);
 			calculate(operation);
 		};
 
@@ -115,10 +115,10 @@ $(function(){
 	$('#btnExcept').on('click',function() {
 		if (operation = null) {
 			operation = '-';
-			before = currentText*1;
+			before = parseFloat(currentText);
 			currentText = '';
 		}else if (operation != null) {
-			after = currentText*1;
+			after = parseFloat(currentText);
 			calculate(operation);
 		};
 

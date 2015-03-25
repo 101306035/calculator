@@ -1,13 +1,14 @@
 
 $(function(){
 
-	float before;
-	float after;
-	float results;
+	var results;
+	var after;
+	var	before;
 	var operation;
-	var currentText = '';
-	$('#btn1').on('click',function() {
 
+	var currentText = '';
+
+	$('#btn1').on('click',function() {
 		currentText = currentText + '1';
 		render();
 	});
@@ -58,30 +59,31 @@ $(function(){
 	});
 
 	$('#btnDecimalPoint').on('click',function() {
-		currentText = currentText + '.';
+		currentText=currentText+'.';
 		render();
-	});
-
+	})
 
 	$('#btnClear').on('click',function() {
 		currentText = '';
 		render();
 	});
-	
+
 	$('#btnEqual').on('click',function() {	
 		after = parseFloat(currentText);
 		calculate(operation);		
 		render();
 	});
-	
+
+	//算式符號	
 	$('#btnAdd').on('click',function() {
 		if(operation = null){
 			operation = '+'
 			before = parseFloat(currentText);
 			currentText = '';
-		}else if (operation != null) {
+		}else{
 			after = parseFloat(currentText);
 			calculate(operation);
+			currentText=currentText;
 		};
 		render();
 	});
@@ -91,11 +93,11 @@ $(function(){
 			operation = '-';
 			before = parseFloat(currentText);
 			currentText = '';
-		}else if (operation != null) {
+		}else{
 			after = parseFloat(currentText);
 			calculate(operation);
+			currentText=currentText;
 		};
-
 		render();
 	});
 
@@ -104,9 +106,10 @@ $(function(){
 			operation = '-';
 			before = parseFloat(currentText);
 			currentText = '';
-		}else if (operation != null) {
+		}else {
 			after = parseFloat(currentText);
 			calculate(operation);
+			currentText=currentText;	
 		};
 
 		render();
@@ -117,39 +120,40 @@ $(function(){
 			operation = '-';
 			before = parseFloat(currentText);
 			currentText = '';
-		}else if (operation != null) {
+		}else{
 			after = parseFloat(currentText);
 			calculate(operation);
+			currentText=currentText;
 		};
 
 		render();
 	});
 	
-	function render(){
-		$('#message').text(currentText);
-	};
+
 
 	function calculate (operation){
-		if (operation=='+') {
+		if(operation=='+') {
 			results = before+after;
 			currentText = ""+results;
-		}
-		else if (operation=='-') {
+		}else if (operation=='-') {
 			results = before-after;
 			currentText = ""+results;
 		}else if (operation=='*') {
 			results = before*after;
-			currentText = ""+results;	
+			currentText = ""+results;
 		}else if (operation=='/') {
 			results = before/after;
 			currentText = ""+results;
-		}else (operation==""){
-			currentText = ""+currentText;
-		};
+		}else{
+		currentText = ""+currentText;
+		}
 		before=null;
 		after=null;
 		results=null;
-		operation=null;
-	};
+		operation=null;	
+	}
 
+	function render(){
+		$('#message').text(currentText);
+	};				
 });

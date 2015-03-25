@@ -57,6 +57,10 @@ $(function(){
 		currentText = currentText + '0';
 		render();
 	});
+	$('#btnNegative').on('click',function() {
+		currentText = currentText + '-';
+		render();
+	});
 
 	$('#btnDecimalPoint').on('click',function() {
 		currentText=currentText+'.';

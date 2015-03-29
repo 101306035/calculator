@@ -1,10 +1,7 @@
 
 $(function(){
 
-	var results;
-	var after;
-	var	before;
-	var operation;
+	var strOper=0;  //暫存運算符號
 
 	var currentText = '';
 
@@ -54,18 +51,21 @@ $(function(){
 	});
 
 	$('#btn0').on('click',function() {
+
 		currentText = currentText + '0';
-		render();
-	});
-	$('#btnNegative').on('click',function() {
-		currentText = currentText + '-';
 		render();
 	});
 
 	$('#btnDecimalPoint').on('click',function() {
+		
 		currentText=currentText+'.';
 		render();
 	})
+
+	$('#btnNegative').on('click',function() {
+		currentText = '-' + currentText;
+		render();
+	});
 
 	$('#btnClear').on('click',function() {
 		currentText = '';
@@ -73,91 +73,64 @@ $(function(){
 	});
 
 	$('#btnEqual').on('click',function() {	
-		after = parseFloat(currentText);
-		calculate(operation);		
+		equal();
 		render();
 	});
 
 	//算式符號	
 	$('#btnAdd').on('click',function() {
-		if(operation = null){
-			operation = '+'
-			before = parseFloat(currentText);
-			currentText = '';
-		}else{
-			after = parseFloat(currentText);
-			calculate(operation);
-			currentText=currentText;
-		};
-		render();
+		operBtn('+');
 	});
 
 	$('#btnLess').on('click',function() {
-		if (operation = null) {
-			operation = '-';
-			before = parseFloat(currentText);
-			currentText = '';
-		}else{
-			after = parseFloat(currentText);
-			calculate(operation);
-			currentText=currentText;
-		};
-		render();
+		operBtn('-');
 	});
 
 	$('#btnMultiply').on('click',function() {
-		if (operation = null) {
-			operation = '-';
-			before = parseFloat(currentText);
-			currentText = '';
-		}else {
-			after = parseFloat(currentText);
-			calculate(operation);
-			currentText=currentText;	
-		};
-
-		render();
+		operBtn('*');
 	});
 
 	$('#btnExcept').on('click',function() {
-		if (operation = null) {
-			operation = '-';
-			before = parseFloat(currentText);
-			currentText = '';
-		}else{
-			after = parseFloat(currentText);
-			calculate(operation);
-			currentText=currentText;
-		};
-
-		render();
+		operBtn('/');
 	});
-	
 
+    //運算符號
+	function operBtn(str){
 
-	function calculate (operation){
-		if(operation=='+') {
-			results = before+after;
-			currentText = ""+results;
-		}else if (operation=='-') {
-			results = before-after;
-			currentText = ""+results;
-		}else if (operation=='*') {
-			results = before*after;
-			currentText = ""+results;
-		}else if (operation=='/') {
-			results = before/after;
-			currentText = ""+results;
-		}else{
-		currentText = ""+currentText;
+		//不按等號的連續運算
+ 		equal();
+		valueA=parseFloat(currentText);
+		strOper=str;
+
+		currentText='';
+		render();
+    }
+
+    //等於
+	function equal(){
+		switch (strOper){
+			case '+':
+				currentText=parseFloat(valueA)+parseFloat(currentText);
+				break;
+			case '-':
+				currentText=parseFloat(valueA)-parseFloat(currentText);
+				break;
+            case '*':
+				currentText=parseFloat(valueA)*parseFloat(currentText);
+				break;
+			case '/':
+				currentText=parseFloat(valueA)/parseFloat(currentText);
+				break;
+			default:
+				break;
 		}
-		before=null;
-		after=null;
-		results=null;
-		operation=null;	
-	}
+		//防呆用
+
+		strOper=null;
+    }
 
 	function render(){
 		$('#message').text(currentText);
-	};				
+	};
+
 });
